@@ -37,5 +37,12 @@ public class UserController
         return "updated....";
     }
 
+    @DeleteMapping("/delete/{id}")
+    public String deleteUser(@PathVariable long id){
+        User DeleteUser=userRepo.findById(id).get();
+
+        userRepo.delete(DeleteUser);
+        return "Deleted user ...."+id;
+    }
 
 }
