@@ -21,7 +21,21 @@ public class UserController
     public List<User> Getusers(){
         return userRepo.findAll();
     }
-
+    @PostMapping("/save")
+    public String saveUser(@RequestBody User user){
+      userRepo.save(user);
+      return "saved....";
+    }
+    @PutMapping("/update/{id}")
+    public String updateUser(@PathVariable long id,@RequestBody User user){
+        User UpdateUser=userRepo.findById(id).get();
+        UpdateUser.setFirstName(user.getFirstName());
+        UpdateUser.setLastName(user.getLastName());
+        UpdateUser.setAge(user.getAge());
+        UpdateUser.setOccumation(user.getOccumation());
+    userRepo.save(UpdateUser);
+        return "updated....";
+    }
 
 
 }
